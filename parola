@@ -1,0 +1,15 @@
+#!/bin/bash
+#This function requires pwgen tool installed beforehand.
+
+password (){
+	if [ "$#" -ne 1 ]; then
+		echo "Using default password strenght 15. Usage: parola <password_strenght>"
+		strenght=15
+	else
+		strenght=$1
+	fi
+
+pwgen -N 1 -s $strenght
+}
+
+password $1
