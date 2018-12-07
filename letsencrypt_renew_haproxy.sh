@@ -9,7 +9,7 @@
 
 GLOBIGNORE='*ca-bundle*'
 
-notofication_email='dzhorov@jump.bg'
+notofication_email='user@mydomain.com'
 certbot_bin='/usr/bin/certbot'
 HA_PORT='8888'
 cert_dir='/etc/pki/tls/certs/'
