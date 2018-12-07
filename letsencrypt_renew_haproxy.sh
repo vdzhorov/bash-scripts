@@ -9,10 +9,10 @@
 
 GLOBIGNORE='*ca-bundle*'
 
-notofication_email='user@mydomain.com'
-certbot_bin='/usr/bin/certbot'
+NOTIFICATION_EMAIL='admin@mydomain.com'
+CERTBOT_BIN='/usr/bin/certbot'
 HA_PORT='8888'
-cert_dir='/etc/pki/tls/certs/'
+CERT_DIR='/etc/pki/tls/certs/'
 RENEW_DAYS='10'
 
 
@@ -26,14 +26,14 @@ get_days_exp() {
 
 run_certbot () {
   if [[ "$1" -ne '' ]]; then
-    $certbot_bin renew -q --tls-sni-01-port=$HA_PORT $1
+    $CERTBOT_BIN renew -q --tls-sni-01-port=$HA_PORT $1
   else
-    $certbot_bin renew -q --tls-sni-01-port=$HA_PORT
+    $CERTBOT_BIN renew -q --tls-sni-01-port=$HA_PORT
   fi
 }
 
 if ! run_certbot --dry-run; then
-  echo "<html>Dry run for Letsencrypt on $(hostname) returned exit status code $?. Please investigate why this happened</html>" | mail -s "Dry run for SSL Letsencrypt on $(hostname) did not succeed." $notofication_email
+  echo "<html>Dry run for Letsencrypt on $(hostname) returned exit status code $?. Please investigate why this happened</html>" | mail -s "Dry run for SSL Letsencrypt on $(hostname) did not succeed." $NOTIFICATION_EMAIL
 else
 
   for dir in /etc/pki/tls/certs/*.crt; do
@@ -52,6 +52,6 @@ else
     done
 
   pkill -f -9 haproxy && haproxy -f /etc/haproxy/haproxy.cfg
-  echo "<html>Certificates on $(hostname) renewed successfully.</html>" | mail -s "Certificates on $(hostname) renewed successfully." $notofication_email
+  echo "<html>Certificates on $(hostname) renewed successfully.</html>" | mail -s "Certificates on $(hostname) renewed successfully." $NOTIFICATION_EMAIL
   fi
 fi
