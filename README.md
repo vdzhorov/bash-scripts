@@ -1,3 +1,3 @@
 # bash-scripts
 
-This is a small bash script collection for anyone to use really.
+This is just a small bash script collectio. It is free for use by anyone.
