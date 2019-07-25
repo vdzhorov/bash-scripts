@@ -18,6 +18,11 @@
 #     /old/locationl     /new/location;
 # }
 #
+# You will need to to include this in your server block afterwards:
+#
+#     if ($new_uri != "") {
+#         rewrite ^(.*)$ $new_uri? permanent;
+#     }
 # Everything will be outputed to a file which you can configure via $OUTPUT_FILE.
 # The array ESCAPE_CHARS hold characters which are replaced by the same character,
 # but preceeded with / (used for rewrites, not maps). This is needed as Nginx otherwise interprets them as environment variables.
