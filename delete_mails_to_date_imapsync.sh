@@ -54,7 +54,7 @@ for month in ${months[@]}; do
       imapsync --host1 $host1 --timeout1 0 --user1 $user1 --password1 $password1 --delete1 --ssl1 --search "SENTBEFORE $day-$month-$year" --host2 $host2 --user2 $user2 --password2 $password2 --ssl2 --timeout2 0 --nofoldersizes --nofoldersizesatend --noexpungeaftereach
         if [[ "$?" == 0 ]]; then
         echo "Succesfully deleted messages older than $day-$month-$year at `date` after retry" >> $log
-        continue
+        break
         fi
       done
     fi
